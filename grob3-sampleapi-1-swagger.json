@@ -1,0 +1,1974 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "version" : "1",
+    "title" : "Flyreel Core API",
+    "description" : "Core API"
+  },
+  "servers" : [ {
+    "url" : "https://api.example.co/v2",
+    "description" : "Example Base Path - Replace example with flyreel for prod"
+  } ],
+  "security" : [ {
+    "bearerAuth" : [ ]
+  } ],
+  "paths" : {
+    "/inspections" : {
+      "get" : {
+        "summary" : "List inspections",
+        "description" : "Returns a list of inspections",
+        "tags" : [ "Inspection" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/limit"
+        }, {
+          "$ref" : "#/components/parameters/offset"
+        }, {
+          "$ref" : "#/components/parameters/sort"
+        }, {
+          "$ref" : "#/components/parameters/search"
+        }, {
+          "$ref" : "#/components/parameters/ordered_before"
+        }, {
+          "$ref" : "#/components/parameters/ordered_after"
+        }, {
+          "$ref" : "#/components/parameters/due_before"
+        }, {
+          "$ref" : "#/components/parameters/due_after"
+        }, {
+          "$ref" : "#/components/parameters/vendor_due_before"
+        }, {
+          "$ref" : "#/components/parameters/vendor_due_after"
+        }, {
+          "$ref" : "#/components/parameters/reviewed_before"
+        }, {
+          "$ref" : "#/components/parameters/reviewed_after"
+        }, {
+          "$ref" : "#/components/parameters/status"
+        }, {
+          "$ref" : "#/components/parameters/first_name"
+        }, {
+          "$ref" : "#/components/parameters/last_name"
+        }, {
+          "$ref" : "#/components/parameters/address1"
+        }, {
+          "$ref" : "#/components/parameters/city"
+        }, {
+          "$ref" : "#/components/parameters/agent_name"
+        }, {
+          "$ref" : "#/components/parameters/agent_email"
+        }, {
+          "$ref" : "#/components/parameters/zip_code"
+        }, {
+          "$ref" : "#/components/parameters/country"
+        }, {
+          "$ref" : "#/components/parameters/email"
+        }, {
+          "$ref" : "#/components/parameters/policy_id"
+        }, {
+          "$ref" : "#/components/parameters/policy_type"
+        }, {
+          "$ref" : "#/components/parameters/flyreel_type"
+        }, {
+          "$ref" : "#/components/parameters/custom_fields"
+        }, {
+          "$ref" : "#/components/parameters/list_inspections_output"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "total" : {
+                      "type" : "integer",
+                      "example" : 50
+                    },
+                    "limit" : {
+                      "type" : "integer",
+                      "example" : 10
+                    },
+                    "offset" : {
+                      "type" : "integer",
+                      "example" : 0
+                    },
+                    "inspections" : {
+                      "type" : "array",
+                      "items" : {
+                        "$ref" : "#/components/schemas/ListInspection"
+                      }
+                    }
+                  },
+                  "required" : [ "total", "limit", "offset", "inspections" ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create inspection",
+        "description" : "Creates a new inspection",
+        "tags" : [ "Inspection" ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/CreateInspection"
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NewInspection"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inspections/{inspection_id}" : {
+      "get" : {
+        "summary" : "Get an inspection",
+        "description" : "Retrieve a specific inspection",
+        "tags" : [ "Inspection" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/InspectionId"
+        }, {
+          "$ref" : "#/components/parameters/get_inspection_output"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetInspectionById"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Update inspection",
+        "description" : "Update a specific inspection",
+        "tags" : [ "Inspection" ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "inspection_id",
+          "required" : true,
+          "description" : "ID of the inspection to update",
+          "schema" : {
+            "$ref" : "#/components/parameters/InspectionId"
+          }
+        }, {
+          "$ref" : "#/components/parameters/InspectionId"
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/UpdateInspection"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NewInspection"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations" : {
+      "get" : {
+        "summary" : "List converstions",
+        "description" : "Returns a list of conversations",
+        "tags" : [ "Conversation" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/limit"
+        }, {
+          "$ref" : "#/components/parameters/offset"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "total" : {
+                      "type" : "integer",
+                      "example" : 50
+                    },
+                    "limit" : {
+                      "type" : "integer",
+                      "example" : 10
+                    },
+                    "offset" : {
+                      "type" : "integer",
+                      "example" : 0
+                    },
+                    "conversations" : {
+                      "type" : "array",
+                      "items" : {
+                        "$ref" : "#/components/schemas/Conversation"
+                      }
+                    }
+                  },
+                  "required" : [ "total", "limit", "offset", "conversations" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/callbackUrl" : {
+      "post" : {
+        "summary" : "Callback url for webhook",
+        "description" : "Flyreel webhook integrations require a public endpoint. The request will be signed and its origins and content can be verified using the associated public key. To verify a request parse the x-flyreel-signature value in the request header and verify the signature against a JSON stringified verison of the request body. The signature is base64 encoded.",
+        "tags" : [ "Webhook" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-flyreel-signature",
+          "schema" : {
+            "type" : "string"
+          },
+          "required" : true
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/InspectionUpdatedPayload"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    },
+    "parameters" : {
+      "get_inspection_output" : {
+        "in" : "query",
+        "name" : "output",
+        "schema" : {
+          "type" : "string",
+          "example" : "pdf",
+          "enum" : [ "json", "pdf" ],
+          "default" : "json"
+        },
+        "required" : false,
+        "description" : "Sets the output type of the response"
+      },
+      "InspectionId" : {
+        "in" : "path",
+        "name" : "inspection_id",
+        "required" : true,
+        "schema" : {
+          "type" : "string",
+          "description" : "The inspection ID",
+          "example" : "5d3633f9103a930011996475"
+        }
+      },
+      "limit" : {
+        "in" : "query",
+        "name" : "limit",
+        "schema" : {
+          "type" : "integer",
+          "minimum" : 1,
+          "maximum" : 200,
+          "default" : 10,
+          "example" : 5
+        },
+        "required" : false,
+        "description" : "The number of items to return"
+      },
+      "offset" : {
+        "in" : "query",
+        "name" : "offset",
+        "schema" : {
+          "type" : "integer",
+          "minimum" : 0,
+          "default" : 0,
+          "example" : 2
+        },
+        "required" : false,
+        "description" : "The number of items to skip before starting to collect the result set"
+      },
+      "sort" : {
+        "in" : "query",
+        "name" : "sort",
+        "schema" : {
+          "type" : "string",
+          "example" : "expiration",
+          "default" : "-createdAt"
+        },
+        "required" : false,
+        "description" : "Sort by expiration, createdAt, carrier_expiration, status or review_completed (eg. ascending = \"createdAt\", descending = \"-createdAt\")"
+      },
+      "carriers" : {
+        "in" : "query",
+        "name" : "carriers",
+        "schema" : {
+          "type" : "string",
+          "example" : "5ced45a977e37d001180f25a, 6ced45a977e37d001180f25c"
+        },
+        "required" : false,
+        "description" : "A comma separated list of carrier IDs. This only applies for GET requests where the user's work_on_carrier role is any"
+      },
+      "carrier_id" : {
+        "in" : "path",
+        "name" : "carrier_id",
+        "schema" : {
+          "type" : "string",
+          "example" : "5ced45a977e37d001180f25a"
+        },
+        "required" : true,
+        "description" : "ID for a carrier"
+      },
+      "inspection_id" : {
+        "in" : "query",
+        "name" : "inspection_id",
+        "schema" : {
+          "type" : "string",
+          "example" : "5d3619da103a930011996413"
+        },
+        "required" : false,
+        "description" : "ID for an inspection"
+      },
+      "search" : {
+        "in" : "query",
+        "name" : "search",
+        "schema" : {
+          "type" : "string",
+          "example" : "o%27sullivan"
+        },
+        "required" : false,
+        "description" : "URI encoded string"
+      },
+      "ordered_before" : {
+        "in" : "query",
+        "name" : "ordered_before",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "ordered_after" : {
+        "in" : "query",
+        "name" : "ordered_after",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "due_before" : {
+        "in" : "query",
+        "name" : "due_before",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "due_after" : {
+        "in" : "query",
+        "name" : "due_after",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "vendor_due_before" : {
+        "in" : "query",
+        "name" : "vendor_due_before",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "vendor_due_after" : {
+        "in" : "query",
+        "name" : "vendor_due_after",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "reviewed_before" : {
+        "in" : "query",
+        "name" : "reviewed_before",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "reviewed_after" : {
+        "in" : "query",
+        "name" : "reviewed_after",
+        "schema" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-12-21T15:25:31.605Z"
+        },
+        "required" : false,
+        "description" : "Valid ISO8601 string"
+      },
+      "status" : {
+        "in" : "query",
+        "name" : "status",
+        "schema" : {
+          "type" : "string",
+          "example" : "pending",
+          "enum" : [ "pending", "ready_for_invite", "invited", "started", "submitted", "ready_for_review", "in_review", "completed", "abandoned", "expired", "cancelled" ]
+        },
+        "required" : false,
+        "description" : "Single string value or comma delimited string (eg. \"invited,started\")"
+      },
+      "first_name" : {
+        "in" : "query",
+        "name" : "first_name",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "Joe"
+        },
+        "description" : "URI encoded string"
+      },
+      "last_name" : {
+        "in" : "query",
+        "name" : "last_name",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "Smith"
+        },
+        "description" : "URI encoded string"
+      },
+      "address1" : {
+        "in" : "query",
+        "name" : "address1",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "3000%20Lawrence%20St"
+        },
+        "description" : "URI encoded string"
+      },
+      "city" : {
+        "in" : "query",
+        "name" : "city",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "Denver"
+        },
+        "description" : "URI encoded string"
+      },
+      "state" : {
+        "in" : "query",
+        "name" : "state",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "CO"
+        },
+        "description" : "URI encoded string - State Abbreviation"
+      },
+      "agent_name" : {
+        "in" : "query",
+        "name" : "agent_name",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "Tim%20Green"
+        },
+        "description" : "URI encoded string"
+      },
+      "agent_email" : {
+        "in" : "query",
+        "name" : "agent_email",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "tim.green@test.com"
+        },
+        "description" : "Valid email"
+      },
+      "zip_code" : {
+        "in" : "query",
+        "name" : "zip_code",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "80205"
+        },
+        "description" : "URI encoded string - Valid US zipcode or CA postal code"
+      },
+      "country" : {
+        "in" : "query",
+        "name" : "country",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "US",
+          "enum" : [ "US", "CA" ]
+        },
+        "description" : "Country"
+      },
+      "email" : {
+        "in" : "query",
+        "name" : "email",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "joe.smith@test.com"
+        },
+        "description" : "Valid email"
+      },
+      "policy_id" : {
+        "in" : "query",
+        "name" : "policy_id",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "1234"
+        },
+        "description" : "URI encoded string"
+      },
+      "policy_type" : {
+        "in" : "query",
+        "name" : "policy_type",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "new",
+          "enum" : [ "new", "renewal", "unknown" ]
+        },
+        "description" : "Valid policy type"
+      },
+      "flyreel_type" : {
+        "in" : "query",
+        "name" : "flyreel_type",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "inspection",
+          "enum" : [ "inspection", "home_review", "claim", "unknown" ]
+        },
+        "description" : "Valid flyreel type"
+      },
+      "custom_fields" : {
+        "in" : "query",
+        "name" : "custom_fields",
+        "required" : false,
+        "schema" : {
+          "type" : "string",
+          "example" : "%7B%22favorite_color%22%3A%20%22red%22%7D"
+        },
+        "description" : "URI encoded JSON object with key/value pairs for custom fields"
+      },
+      "list_inspections_output" : {
+        "in" : "query",
+        "name" : "output",
+        "schema" : {
+          "type" : "string",
+          "example" : "csv",
+          "enum" : [ "json", "csv" ],
+          "default" : "json"
+        },
+        "required" : false,
+        "description" : "Sets the output type of the response"
+      }
+    },
+    "schemas" : {
+      "GetInspectionById" : {
+        "type" : "object",
+        "properties" : {
+          "carrier" : {
+            "type" : "string",
+            "example" : "5d3633f9103a930011996475"
+          },
+          "_id" : {
+            "type" : "string",
+            "example" : "5ced45a977e37d001180f25a"
+          },
+          "policy_id" : {
+            "type" : "string",
+            "example" : "1234"
+          },
+          "policy_type" : {
+            "type" : "string",
+            "example" : "new"
+          },
+          "flyreel_type" : {
+            "type" : "string",
+            "example" : "inspection"
+          },
+          "first_name" : {
+            "type" : "string",
+            "example" : "Joe"
+          },
+          "last_name" : {
+            "type" : "string",
+            "example" : "Smith"
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "joe.smith@test.com"
+          },
+          "phone" : {
+            "type" : "string",
+            "example" : "+15432223333"
+          },
+          "expiration" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-06T04:59:59.999Z"
+          },
+          "carrier_expiration" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-09T04:59:59.999Z"
+          },
+          "address1" : {
+            "type" : "string",
+            "example" : "3000 Lawrence St"
+          },
+          "address2" : {
+            "type" : "string",
+            "example" : "Apt. 1"
+          },
+          "city" : {
+            "type" : "string",
+            "example" : "Denver"
+          },
+          "state" : {
+            "type" : "string",
+            "example" : "CO",
+            "minLength" : 2,
+            "maxLength" : 2,
+            "description" : "State/province code"
+          },
+          "zip_code" : {
+            "type" : "string",
+            "example" : "80205"
+          },
+          "country" : {
+            "type" : "string",
+            "example" : "US",
+            "enum" : [ "US", "CA" ],
+            "description" : "Country"
+          },
+          "agent_name" : {
+            "type" : "string",
+            "example" : "Tim Green"
+          },
+          "agent_email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "tim.green@test.com"
+          },
+          "status" : {
+            "type" : "string",
+            "example" : "invited",
+            "enum" : [ "pending", "ready_for_invite", "invited", "started", "submitted", "ready_for_review", "in_review", "completed", "abandoned", "expired", "cancelled" ]
+          },
+          "ordered_location" : {
+            "$ref" : "#/components/schemas/Location"
+          },
+          "timezone" : {
+            "$ref" : "#/components/schemas/TimeZone"
+          },
+          "contact_log" : {
+            "$ref" : "#/components/schemas/ContactLog"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2019-10-31T02:49:14.559Z"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2019-10-31T02:49:14.559Z"
+          },
+          "custom_fields" : {
+            "type" : "object",
+            "description" : "Carrier defined custom fields associated with the inspection",
+            "properties" : {
+              "custom_field_1" : {
+                "type" : "string",
+                "example" : "Custom field"
+              }
+            }
+          },
+          "meta" : {
+            "type" : "object",
+            "properties" : {
+              "external_id" : {
+                "type" : "string",
+                "example" : "5fcfe28db910d6000e6f14d2"
+              }
+            }
+          },
+          "conversation" : {
+            "type" : "object",
+            "properties" : {
+              "_id" : {
+                "type" : "string",
+                "example" : "5ced45a977e37d001180f25a"
+              },
+              "name" : {
+                "type" : "string",
+                "example" : "Residential (2019-08-07 12:23)"
+              },
+              "modules" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "_id" : {
+                      "type" : "string",
+                      "example" : "5d4b174a5500f500115bd43b"
+                    },
+                    "name" : {
+                      "type" : "string",
+                      "example" : "Exterior - Back"
+                    },
+                    "iteration_id" : {
+                      "type" : "string",
+                      "example" : "1"
+                    },
+                    "messages" : {
+                      "type" : "array",
+                      "description" : "Does not include media message types or associate answers",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "_id" : {
+                            "type" : "string",
+                            "example" : "5d4b173e5500f500115bd415"
+                          },
+                          "name" : {
+                            "type" : "string",
+                            "example" : "Request for Personal Article Floater"
+                          },
+                          "text" : {
+                            "type" : "string",
+                            "example" : "Does your water heater have an automatic water detection shut-off?"
+                          },
+                          "type" : {
+                            "type" : "string",
+                            "example" : "select_one"
+                          },
+                          "answer" : {
+                            "description" : "null is an acceptable answer value",
+                            "oneOf" : [ {
+                              "type" : "string",
+                              "example" : "yes"
+                            }, {
+                              "type" : "number",
+                              "example" : 1.1
+                            }, {
+                              "type" : "boolean",
+                              "example" : false
+                            }, {
+                              "type" : "object",
+                              "properties" : {
+                                "address" : {
+                                  "type" : "string",
+                                  "example" : "3000 Lawrence St, Denver CO 80205"
+                                },
+                                "coords" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "lat" : {
+                                      "type" : "number",
+                                      "example" : 39.7562753
+                                    },
+                                    "lng" : {
+                                      "type" : "number",
+                                      "example" : -105.0180197
+                                    }
+                                  }
+                                }
+                              }
+                            }, {
+                              "type" : "array",
+                              "items" : {
+                                "type" : "string"
+                              },
+                              "example" : [ "100% Copper", "PVC" ]
+                            } ]
+                          }
+                        },
+                        "required" : [ "_id", "name", "text", "type", "answer" ]
+                      }
+                    }
+                  },
+                  "required" : [ "_id", "name", "messages" ]
+                }
+              }
+            },
+            "required" : [ "_id", "name", "modules" ]
+          }
+        },
+        "required" : [ "_id", "carrier", "conversation", "policy_id", "policy_type", "first_name", "last_name", "email", "flyreel_type", "expiration", "carrier_expiration", "status", "address1", "city", "state", "country", "zip_code", "ordered_location", "contact_log", "createdAt", "updatedAt", "timezone" ]
+      },
+      "NewInspection" : {
+        "type" : "object",
+        "properties" : {
+          "_id" : {
+            "type" : "string",
+            "example" : "5cf830159808e60011b3a6bb"
+          },
+          "ordered_location" : {
+            "$ref" : "#/components/schemas/Location"
+          },
+          "carrier" : {
+            "type" : "string",
+            "example" : "5d03f24e58d2970012a3418e"
+          },
+          "conversation" : {
+            "type" : "object",
+            "properties" : {
+              "_id" : {
+                "type" : "string",
+                "example" : "5d03f28f5849440011ba7abe"
+              },
+              "name" : {
+                "type" : "string",
+                "example" : "Flyreel Conversation"
+              },
+              "version" : {
+                "type" : "string",
+                "example" : 1
+              },
+              "started" : {
+                "type" : "string",
+                "format" : "date-time",
+                "example" : "2020-11-23T21:34:48.858Z"
+              },
+              "submitted" : {
+                "type" : "string",
+                "format" : "date-time",
+                "example" : "2020-11-23T21:34:48.858Z"
+              }
+            },
+            "required" : [ "_id", "name", "version" ]
+          },
+          "invalid_email" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "policy_id" : {
+            "type" : "string",
+            "example" : "1234"
+          },
+          "policy_type" : {
+            "type" : "string",
+            "example" : "new"
+          },
+          "flyreel_type" : {
+            "type" : "string",
+            "example" : "inspection"
+          },
+          "first_name" : {
+            "type" : "string",
+            "example" : "Joe"
+          },
+          "last_name" : {
+            "type" : "string",
+            "example" : "Smith"
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "joe.smith@test.com"
+          },
+          "phone" : {
+            "type" : "string",
+            "example" : "+15432223333"
+          },
+          "expiration" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-06T04:59:59.999Z"
+          },
+          "carrier_expiration" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-09T04:59:59.999Z"
+          },
+          "address1" : {
+            "type" : "string",
+            "example" : "3000 Lawrence St"
+          },
+          "address2" : {
+            "type" : "string",
+            "example" : "Apt. 1"
+          },
+          "city" : {
+            "type" : "string",
+            "example" : "Denver"
+          },
+          "state" : {
+            "type" : "string",
+            "example" : "CO",
+            "minLength" : 2,
+            "maxLength" : 2,
+            "description" : "State/province code"
+          },
+          "zip_code" : {
+            "type" : "string",
+            "example" : "80205"
+          },
+          "country" : {
+            "type" : "string",
+            "example" : "US",
+            "enum" : [ "US", "CA" ]
+          },
+          "agent_name" : {
+            "type" : "string",
+            "example" : "Tim Green"
+          },
+          "agent_email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "tim.green@test.com"
+          },
+          "agent_phone" : {
+            "type" : "string",
+            "example" : "+15432224444"
+          },
+          "status" : {
+            "type" : "string",
+            "example" : "invited",
+            "enum" : [ "pending", "ready_for_invite", "invited", "started", "submitted", "ready_for_review", "in_review", "completed", "abandoned", "expired", "cancelled" ]
+          },
+          "code" : {
+            "type" : "string",
+            "example" : "GLV-301-KGN"
+          },
+          "sha1" : {
+            "type" : "string",
+            "example" : "e4b05d846de4a7ba44ebd54fa31a261e9653f0e2"
+          },
+          "timezone" : {
+            "$ref" : "#/components/schemas/TimeZone"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-11-23T21:34:48.858Z"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-11-23T21:34:48.858Z"
+          },
+          "__v" : {
+            "type" : "number",
+            "example" : 0
+          }
+        },
+        "required" : [ "_id", "carrier", "conversation", "invalid_email", "policy_id", "first_name", "last_name", "expiration", "carrier_expiration", "email", "code", "status", "address1", "city", "state", "country", "zip_code", "sha1", "createdAt", "updatedAt", "timezone" ]
+      },
+      "Conversation" : {
+        "type" : "object",
+        "properties" : {
+          "_id" : {
+            "type" : "string",
+            "example" : "5d03f28f5849440011ba7abe"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Flyreel Conversation"
+          },
+          "version" : {
+            "type" : "string",
+            "example" : 1
+          }
+        },
+        "required" : [ "_id", "carrier", "version" ]
+      },
+      "ListInspection" : {
+        "type" : "object",
+        "properties" : {
+          "_id" : {
+            "type" : "string",
+            "example" : "5d03f28f5849440011ba7abe"
+          },
+          "invalid_email" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "conversation" : {
+            "type" : "object",
+            "properties" : {
+              "_id" : {
+                "type" : "string",
+                "example" : "5d03f28f5849440011ba7abe"
+              },
+              "name" : {
+                "type" : "string",
+                "example" : "Flyreel Conversation"
+              },
+              "version" : {
+                "type" : "string",
+                "example" : 1
+              },
+              "started" : {
+                "type" : "string",
+                "format" : "date-time",
+                "example" : "2020-11-23T21:34:48.858Z"
+              },
+              "submitted" : {
+                "type" : "string",
+                "format" : "date-time",
+                "example" : "2020-11-23T21:34:48.858Z"
+              }
+            },
+            "required" : [ "_id", "name", "version" ]
+          },
+          "policy_id" : {
+            "type" : "string",
+            "example" : "1234"
+          },
+          "policy_type" : {
+            "type" : "string",
+            "example" : "new",
+            "description" : "Policy type"
+          },
+          "first_name" : {
+            "type" : "string",
+            "example" : "Joe"
+          },
+          "last_name" : {
+            "type" : "string",
+            "example" : "Smith"
+          },
+          "email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "joe.smith@test.com"
+          },
+          "phone" : {
+            "type" : "string",
+            "example" : "+15432223333"
+          },
+          "expiration" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-06T04:59:59.999Z"
+          },
+          "carrier_expiration" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-08T04:59:59.999Z"
+          },
+          "address1" : {
+            "type" : "string",
+            "example" : "3000 Lawrence St"
+          },
+          "address2" : {
+            "type" : "string",
+            "example" : "Apt. 1"
+          },
+          "city" : {
+            "type" : "string",
+            "example" : "Denver"
+          },
+          "state" : {
+            "type" : "string",
+            "example" : "CO",
+            "minLength" : 2,
+            "maxLength" : 2,
+            "description" : "State/province code"
+          },
+          "country" : {
+            "type" : "string",
+            "example" : "US",
+            "enum" : [ "US", "CA" ]
+          },
+          "zip_code" : {
+            "type" : "string",
+            "example" : "80205"
+          },
+          "agent_name" : {
+            "type" : "string",
+            "example" : "Tim Green"
+          },
+          "agent_email" : {
+            "type" : "string",
+            "format" : "email",
+            "example" : "tim.green@test.com"
+          },
+          "agent_phone" : {
+            "type" : "string",
+            "example" : "+15432224444"
+          },
+          "status" : {
+            "type" : "string",
+            "example" : "invited",
+            "enum" : [ "pending", "ready_for_invite", "invited", "started", "submitted", "ready_for_review", "in_review", "completed", "abandoned", "expired", "cancelled" ]
+          },
+          "carrier" : {
+            "type" : "string",
+            "example" : "5db25266a21a590011bd8026"
+          },
+          "code" : {
+            "type" : "string",
+            "example" : "WQD-755-JQF"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-01T21:51:39.189Z"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "example" : "2020-12-01T21:51:39.189Z"
+          },
+          "timezone" : {
+            "$ref" : "#/components/schemas/TimeZone"
+          },
+          "reviewer" : {
+            "type" : "string",
+            "example" : "9af25266a21a590011bd4928"
+          },
+          "review_completed" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "custom_fields" : {
+            "type" : "object",
+            "description" : "Carrier defined custom fields associated with the inspection",
+            "properties" : {
+              "custom_field_1" : {
+                "type" : "string",
+                "example" : "Custom field"
+              }
+            }
+          }
+        },
+        "required" : [ "_id", "carrier", "conversation", "policy_id", "first_name", "last_name", "email", "code", "status", "address1", "city", "state", "country", "zip_code", "createdAt", "updatedAt", "timezone", "expiration", "carrier_expiration", "invalid_email" ]
+      },
+      "ContactLog" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "sent" : {
+              "type" : "string",
+              "format" : "date-time",
+              "example" : "2019-10-25 01:54:09.538Z"
+            },
+            "meta" : {
+              "type" : "object",
+              "properties" : {
+                "status" : {
+                  "type" : "object",
+                  "description" : "Statuses may vary depending on messaging service",
+                  "properties" : {
+                    "opened" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Postmark"
+                    },
+                    "delivered" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Postmark, Twilio"
+                    },
+                    "clicked" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Postmark"
+                    },
+                    "bounced" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Postmark"
+                    },
+                    "SpamReport" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Postmark"
+                    },
+                    "SubscriptionChange" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Postmark"
+                    },
+                    "Accepted" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Failed" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Queued" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Read" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Received" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Receiving" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Sending" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Sent" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    },
+                    "Undelivered" : {
+                      "type" : "boolean",
+                      "example" : true,
+                      "description" : "Twilio"
+                    }
+                  }
+                },
+                "event_time" : {
+                  "type" : "string",
+                  "format" : "date-time",
+                  "example" : "2019-10-31T02:49:14.559Z"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TimeZone" : {
+        "type" : "object",
+        "properties" : {
+          "dst_offset" : {
+            "type" : "integer",
+            "example" : 4,
+            "description" : "Daylight saving time offset"
+          },
+          "raw_offset" : {
+            "type" : "integer",
+            "example" : -25200,
+            "description" : "Raw offset"
+          },
+          "timezone_id" : {
+            "type" : "string",
+            "example" : "America/Denver"
+          },
+          "timezone_name" : {
+            "type" : "string",
+            "example" : "Mountain Standard Time"
+          }
+        },
+        "required" : [ "dst_offset", "raw_offset", "timezone_id", "timezone_name" ]
+      },
+      "Location" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "example" : "Point"
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "example" : [ -105.0849915, 39.6867229 ]
+          }
+        },
+        "required" : [ "type", "coordinates" ]
+      },
+      "ConversationModule" : {
+        "type" : "object",
+        "properties" : {
+          "carrier" : {
+            "type" : "string",
+            "example" : "5d3633f9103a930011996475"
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "module1"
+          },
+          "key" : {
+            "type" : "string"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "hero_image" : {
+            "type" : "string"
+          },
+          "messages" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "completed" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "paths" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          },
+          "rules" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          }
+        },
+        "required" : [ "carrier" ]
+      }
+    },
+    "requestBodies" : {
+      "CreateInspection" : {
+        "description" : "A JSON object containing inspection details - address1, city, state, zip_code, and country must represent a valid location and phone numbers cannot be fake or they will fail the validation check",
+        "required" : true,
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "conversation" : {
+                  "type" : "string",
+                  "example" : "5d3633f9103a930011996475",
+                  "description" : "Optional conversation ID - default conversation will be used if not provided"
+                },
+                "policy_id" : {
+                  "type" : "string",
+                  "example" : "1234",
+                  "description" : "External policy ID"
+                },
+                "policy_type" : {
+                  "type" : "string",
+                  "enum" : [ "new", "renewal", "unknown" ],
+                  "default" : "unknown",
+                  "example" : "new",
+                  "description" : "Policy type"
+                },
+                "flyreel_type" : {
+                  "type" : "string",
+                  "enum" : [ "inspection", "home_review", "claim", "unknown" ],
+                  "default" : "unknown",
+                  "example" : "inspection",
+                  "description" : "Flyreel type"
+                },
+                "first_name" : {
+                  "type" : "string",
+                  "example" : "Joe",
+                  "description" : "First name"
+                },
+                "last_name" : {
+                  "type" : "string",
+                  "example" : "Smith",
+                  "description" : "Last name"
+                },
+                "email" : {
+                  "type" : "string",
+                  "format" : "email",
+                  "example" : "joe.smith@test.com",
+                  "description" : "Customer email"
+                },
+                "phone" : {
+                  "type" : "string",
+                  "example" : "+15432223333",
+                  "description" : "Customer phone number - must be a valid phone number"
+                },
+                "expiration" : {
+                  "type" : "string",
+                  "format" : "date-time",
+                  "example" : "2020-12-06T04:59:59.999Z",
+                  "description" : "Flyreel expiration date - must be at least 5 days greater than the current datetime and less than 365 days from the current datetime"
+                },
+                "carrier_expiration" : {
+                  "type" : "string",
+                  "format" : "date-time",
+                  "example" : "2020-12-08T04:59:59.999Z",
+                  "description" : "Carrier expiration date - must be at least 2 days greater than the expiration datetime and less than 367 days from the current datetime"
+                },
+                "address1" : {
+                  "type" : "string",
+                  "example" : "3000 Lawrence St",
+                  "description" : "Address"
+                },
+                "address2" : {
+                  "type" : "string",
+                  "example" : "Apt. 1",
+                  "description" : "Secondary address"
+                },
+                "city" : {
+                  "type" : "string",
+                  "example" : "Denver",
+                  "description" : "City"
+                },
+                "state" : {
+                  "type" : "string",
+                  "example" : "CO",
+                  "minLength" : 2,
+                  "maxLength" : 2,
+                  "description" : "State/province code"
+                },
+                "zip_code" : {
+                  "type" : "string",
+                  "example" : "80205",
+                  "description" : "Zip code"
+                },
+                "country" : {
+                  "type" : "string",
+                  "example" : "US",
+                  "enum" : [ "US", "CA" ],
+                  "description" : "Country"
+                },
+                "agent_name" : {
+                  "type" : "string",
+                  "example" : "Tim Green",
+                  "description" : "Agents full name"
+                },
+                "agent_email" : {
+                  "type" : "string",
+                  "format" : "email",
+                  "example" : "tim.green@test.com",
+                  "description" : "Agents email"
+                },
+                "agent_phone" : {
+                  "type" : "string",
+                  "example" : "+15432224444",
+                  "description" : "Agents phone number - must be a valid phone number"
+                },
+                "custom_fields" : {
+                  "type" : "object",
+                  "description" : "Carrier defined custom fields associated with the inspection",
+                  "properties" : {
+                    "custom_field_1" : {
+                      "type" : "string",
+                      "example" : "Custom field"
+                    }
+                  }
+                },
+                "meta" : {
+                  "type" : "object",
+                  "properties" : {
+                    "external_id" : {
+                      "type" : "string"
+                    },
+                    "forms" : {
+                      "type" : "object",
+                      "properties" : {
+                        "self_inspection_form_id" : {
+                          "type" : "string"
+                        },
+                        "self_inspection_internal_form" : {
+                          "type" : "string"
+                        },
+                        "inspection_form_id" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "required" : [ "policy_id", "first_name", "last_name", "email", "expiration", "carrier_expiration", "address1", "city", "state", "zip_code", "country" ]
+            }
+          }
+        }
+      },
+      "UpdateInspection" : {
+        "description" : "A JSON object containing inspection details - address1, city, state, zip_code, and country must represent a valid location and phone numbers cannot be fake or they will fail the validation check",
+        "required" : true,
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "conversation" : {
+                  "type" : "string",
+                  "example" : "5d3633f9103a930011996475",
+                  "description" : "Optional conversation ID - default conversation will be used if not provided"
+                },
+                "policy_id" : {
+                  "type" : "string",
+                  "example" : "1234",
+                  "description" : "External policy ID"
+                },
+                "policy_type" : {
+                  "type" : "string",
+                  "enum" : [ "new", "renewal", "unknown" ],
+                  "default" : "unknown",
+                  "example" : "new",
+                  "description" : "Policy type"
+                },
+                "flyreel_type" : {
+                  "type" : "string",
+                  "enum" : [ "inspection", "home_review", "claim", "unknown" ],
+                  "default" : "unknown",
+                  "example" : "inspection",
+                  "description" : "Flyreel type"
+                },
+                "first_name" : {
+                  "type" : "string",
+                  "example" : "Joe",
+                  "description" : "First name"
+                },
+                "last_name" : {
+                  "type" : "string",
+                  "example" : "Smith",
+                  "description" : "Last name"
+                },
+                "email" : {
+                  "type" : "string",
+                  "format" : "email",
+                  "example" : "joe.smith@test.com",
+                  "description" : "Customer email"
+                },
+                "phone" : {
+                  "type" : "string",
+                  "example" : "+15432223333",
+                  "description" : "Customer phone number - must be a valid phone number"
+                },
+                "expiration" : {
+                  "type" : "string",
+                  "format" : "date-time",
+                  "example" : "2020-12-06T04:59:59.999Z",
+                  "description" : "Flyreel expiration date - must be at least 5 days greater than the current datetime and less than 365 days from the current datetime"
+                },
+                "carrier_expiration" : {
+                  "type" : "string",
+                  "format" : "date-time",
+                  "example" : "2020-12-08T04:59:59.999Z",
+                  "description" : "Carrier expiration date - must be at least 2 days greater than the expiration datetime and less than 367 days from the current datetime"
+                },
+                "address1" : {
+                  "type" : "string",
+                  "example" : "3000 Lawrence St",
+                  "description" : "Address"
+                },
+                "address2" : {
+                  "type" : "string",
+                  "example" : "Apt. 1",
+                  "description" : "Secondary address"
+                },
+                "city" : {
+                  "type" : "string",
+                  "example" : "Denver",
+                  "description" : "City"
+                },
+                "state" : {
+                  "type" : "string",
+                  "example" : "CO",
+                  "minLength" : 2,
+                  "maxLength" : 2,
+                  "description" : "State/province code"
+                },
+                "zip_code" : {
+                  "type" : "string",
+                  "example" : "80205",
+                  "description" : "Zip code"
+                },
+                "status" : {
+                  "type" : "string",
+                  "example" : "invited",
+                  "enum" : [ "pending", "ready_for_invite", "invited", "started", "submitted", "ready_for_review", "in_review", "completed", "abandoned", "expired", "cancelled" ]
+                },
+                "country" : {
+                  "type" : "string",
+                  "example" : "US",
+                  "enum" : [ "US", "CA" ],
+                  "description" : "Country"
+                },
+                "agent_name" : {
+                  "type" : "string",
+                  "example" : "Tim Green",
+                  "description" : "Agents full name"
+                },
+                "agent_email" : {
+                  "type" : "string",
+                  "format" : "email",
+                  "example" : "tim.green@test.com",
+                  "description" : "Agents email"
+                },
+                "agent_phone" : {
+                  "type" : "string",
+                  "example" : "+15432224444",
+                  "description" : "Agents phone number - must be a valid phone number"
+                },
+                "custom_fields" : {
+                  "type" : "object",
+                  "description" : "Carrier defined custom fields associated with the inspection",
+                  "properties" : {
+                    "custom_field_1" : {
+                      "type" : "string",
+                      "example" : "Custom field"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "InspectionUpdatedPayload" : {
+        "required" : true,
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "string",
+                  "example" : "5d0a3cb00cd81f001119fc11",
+                  "description" : "Flyreel ID"
+                },
+                "external_id" : {
+                  "type" : "string",
+                  "example" : "external_id",
+                  "description" : "Empty string if meta.external_id does not exist"
+                },
+                "changes" : {
+                  "type" : "object",
+                  "properties" : {
+                    "carrier" : {
+                      "type" : "string",
+                      "example" : "5d3633f9103a930011996475"
+                    },
+                    "_id" : {
+                      "type" : "string",
+                      "example" : "5ced45a977e37d001180f25a"
+                    },
+                    "policy_id" : {
+                      "type" : "string",
+                      "example" : "1234"
+                    },
+                    "policy_type" : {
+                      "type" : "string",
+                      "example" : "new"
+                    },
+                    "flyreel_type" : {
+                      "type" : "string",
+                      "example" : "inspection"
+                    },
+                    "first_name" : {
+                      "type" : "string",
+                      "example" : "Joe"
+                    },
+                    "last_name" : {
+                      "type" : "string",
+                      "example" : "Smith"
+                    },
+                    "email" : {
+                      "type" : "string",
+                      "format" : "email",
+                      "example" : "joe.smith@test.com"
+                    },
+                    "phone" : {
+                      "type" : "string",
+                      "example" : "+15432223333"
+                    },
+                    "expiration" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2020-12-06T04:59:59.999Z"
+                    },
+                    "carrier_expiration" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2020-12-09T04:59:59.999Z"
+                    },
+                    "address1" : {
+                      "type" : "string",
+                      "example" : "3000 Lawrence St"
+                    },
+                    "address2" : {
+                      "type" : "string",
+                      "example" : "Apt. 1"
+                    },
+                    "city" : {
+                      "type" : "string",
+                      "example" : "Denver"
+                    },
+                    "state" : {
+                      "type" : "string",
+                      "example" : "CO",
+                      "minLength" : 2,
+                      "maxLength" : 2,
+                      "description" : "State/province code"
+                    },
+                    "zip_code" : {
+                      "type" : "string",
+                      "example" : "80205"
+                    },
+                    "country" : {
+                      "type" : "string",
+                      "example" : "US",
+                      "enum" : [ "US", "CA" ],
+                      "description" : "Country"
+                    },
+                    "agent_name" : {
+                      "type" : "string",
+                      "example" : "Tim Green"
+                    },
+                    "agent_email" : {
+                      "type" : "string",
+                      "format" : "email",
+                      "example" : "tim.green@test.com"
+                    },
+                    "status" : {
+                      "type" : "string",
+                      "example" : "invited",
+                      "enum" : [ "pending", "ready_for_invite", "invited", "started", "submitted", "ready_for_review", "in_review", "completed", "abandoned", "expired", "cancelled" ]
+                    },
+                    "ordered_location" : {
+                      "$ref" : "#/components/schemas/Location"
+                    },
+                    "timezone" : {
+                      "$ref" : "#/components/schemas/TimeZone"
+                    },
+                    "contact_log" : {
+                      "$ref" : "#/components/schemas/ContactLog"
+                    },
+                    "createdAt" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2019-10-31T02:49:14.559Z"
+                    },
+                    "updatedAt" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2019-10-31T02:49:14.559Z"
+                    },
+                    "meta" : {
+                      "type" : "object",
+                      "properties" : {
+                        "external_id" : {
+                          "type" : "string",
+                          "example" : "5fcfe28db910d6000e6f14d2"
+                        }
+                      }
+                    },
+                    "conversation" : {
+                      "type" : "object",
+                      "properties" : {
+                        "_id" : {
+                          "type" : "string",
+                          "example" : "5ced45a977e37d001180f25a"
+                        },
+                        "name" : {
+                          "type" : "string",
+                          "example" : "Residential (2019-08-07 12:23)"
+                        }
+                      }
+                    }
+                  }
+                },
+                "changedAt" : {
+                  "type" : "string",
+                  "format" : "date-time",
+                  "example" : "2020-12-09T04:59:59.999Z\""
+                },
+                "current" : {
+                  "type" : "object",
+                  "properties" : {
+                    "carrier" : {
+                      "type" : "string",
+                      "example" : "5d3633f9103a930011996475"
+                    },
+                    "_id" : {
+                      "type" : "string",
+                      "example" : "5ced45a977e37d001180f25a"
+                    },
+                    "policy_id" : {
+                      "type" : "string",
+                      "example" : "1234"
+                    },
+                    "policy_type" : {
+                      "type" : "string",
+                      "example" : "new"
+                    },
+                    "flyreel_type" : {
+                      "type" : "string",
+                      "example" : "inspection"
+                    },
+                    "first_name" : {
+                      "type" : "string",
+                      "example" : "Joe"
+                    },
+                    "last_name" : {
+                      "type" : "string",
+                      "example" : "Smith"
+                    },
+                    "email" : {
+                      "type" : "string",
+                      "format" : "email",
+                      "example" : "joe.smith@test.com"
+                    },
+                    "phone" : {
+                      "type" : "string",
+                      "example" : "+15432223333"
+                    },
+                    "expiration" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2020-12-06T04:59:59.999Z"
+                    },
+                    "carrier_expiration" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2020-12-09T04:59:59.999Z"
+                    },
+                    "address1" : {
+                      "type" : "string",
+                      "example" : "3000 Lawrence St"
+                    },
+                    "address2" : {
+                      "type" : "string",
+                      "example" : "Apt. 1"
+                    },
+                    "city" : {
+                      "type" : "string",
+                      "example" : "Denver"
+                    },
+                    "state" : {
+                      "type" : "string",
+                      "example" : "CO",
+                      "minLength" : 2,
+                      "maxLength" : 2,
+                      "description" : "State/province code"
+                    },
+                    "zip_code" : {
+                      "type" : "string",
+                      "example" : "80205"
+                    },
+                    "country" : {
+                      "type" : "string",
+                      "example" : "US",
+                      "enum" : [ "US", "CA" ],
+                      "description" : "Country"
+                    },
+                    "agent_name" : {
+                      "type" : "string",
+                      "example" : "Tim Green"
+                    },
+                    "agent_email" : {
+                      "type" : "string",
+                      "format" : "email",
+                      "example" : "tim.green@test.com"
+                    },
+                    "status" : {
+                      "type" : "string",
+                      "example" : "invited",
+                      "enum" : [ "pending", "ready_for_invite", "invited", "started", "submitted", "ready_for_review", "in_review", "completed", "abandoned", "expired", "cancelled" ]
+                    },
+                    "ordered_location" : {
+                      "$ref" : "#/components/schemas/Location"
+                    },
+                    "timezone" : {
+                      "$ref" : "#/components/schemas/TimeZone"
+                    },
+                    "contact_log" : {
+                      "$ref" : "#/components/schemas/ContactLog"
+                    },
+                    "createdAt" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2019-10-31T02:49:14.559Z"
+                    },
+                    "updatedAt" : {
+                      "type" : "string",
+                      "format" : "date-time",
+                      "example" : "2019-10-31T02:49:14.559Z"
+                    },
+                    "meta" : {
+                      "type" : "object",
+                      "properties" : {
+                        "external_id" : {
+                          "type" : "string",
+                          "example" : "5fcfe28db910d6000e6f14d2"
+                        }
+                      }
+                    },
+                    "conversation" : {
+                      "type" : "object",
+                      "properties" : {
+                        "_id" : {
+                          "type" : "string",
+                          "example" : "5ced45a977e37d001180f25a"
+                        },
+                        "name" : {
+                          "type" : "string",
+                          "example" : "Residential (2019-08-07 12:23)"
+                        }
+                      }
+                    }
+                  },
+                  "required" : [ "_id", "carrier", "policy_id", "policy_type", "flyreel_type", "first_name", "last_name", "email", "phone", "expiration", "carrier_expiration", "address1", "city", "state", "zip_code", "country", "agent_name", "agent_email", "status", "ordered_location", "timezone", "contact_log", "createdAt", "updatedAt", "conversation" ]
+                }
+              },
+              "required" : [ "id", "changes", "changedAt", "current" ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
